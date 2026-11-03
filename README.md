@@ -13,18 +13,56 @@ Type a stock symbol, get the time, company name, price, and how much it changed.
 It keeps asking for symbols until you type `q` (or press Ctrl+D).
 
 ## How to run
+
 Needs Python 3.8 or newer and an internet connection.
 
-    ./run.sh          (macOS)
+### On a Mac with VS Code (what I used)
+1. Check Python: open Terminal and run `python3 --version`.
+   If it is missing, install it from python.org (or `brew install python`).
+2. Open the project: in VS Code choose File > Open Folder and pick the `stock`
+   folder. Install the "Python" extension from Microsoft if VS Code asks.
+3. Open the VS Code terminal (Terminal > New Terminal). It opens in the `stock`
+   folder. Run these one at a time:
 
-or manually:
+       python3 -m venv .venv
+       source .venv/bin/activate
+       pip install -r requirements.txt
 
-    pip install -r requirements.txt
-    python stockinfo.py
+   The prompt should now start with `(.venv)`.
+4. Make VS Code use that environment: press Cmd+Shift+P, choose
+   "Python: Select Interpreter", and pick the one that shows `.venv`.
+   (This matters if you use the Run button.)
+5. Run the program:
 
-Tests (no internet needed, the network is faked):
+       python stockinfo.py
+
+   or click the Play button at the top right of `stockinfo.py`. Type a symbol
+   such as `ADBE` in the terminal and press Enter. Type `q` to quit.
+
+Shortcut: `./run.sh` does steps 3 and 5 for you (use `bash run.sh` if you get
+"permission denied").
+
+### On Windows
+Run `run.bat`, or do the same steps by hand but activate with
+`.venv\Scripts\activate`.
+
+### Tests
+No internet needed (the network is faked):
 
     python test_stockinfo.py
+
+It should end with `Ran 28 tests ... OK`.
+
+### If something goes wrong
+| What you see | Why | Fix |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'requests'` | The virtual environment is not active, so Python can't find `requests` | Run `source .venv/bin/activate` then `pip install -r requirements.txt`. With the Play button, select the `.venv` interpreter (step 4) |
+| `No such file or directory: venv/bin/activate` | The folder is called `.venv` (with a dot) | Use `source .venv/bin/activate` |
+| `command not found: python` | Not inside the virtual environment | Use `python3`, or activate `.venv` first |
+| `permission denied: ./run.sh` | The script is not marked as runnable | Use `bash run.sh` |
+| `Error: 'XYZ' is not a valid symbol.` | The symbol doesn't exist (check spelling, for example ADBE not ABDE) | Try another symbol |
+| `Error: No network connection ...` | No internet, or a firewall is blocking it | Check your connection and try again |
+| `Error: Too many requests ...` | Yahoo is rate-limiting you | Wait a minute and try again |
 
 ## Which API I picked, and why
 I looked at a few options for getting stock data from Python:
@@ -62,7 +100,7 @@ function and `parse_chart()`.
 
 ## Files
 - `stockinfo.py` - the program
-- `test_stockinfo.py` - 20 offline tests
+- `test_stockinfo.py` - 28 offline tests
 - `requirements.txt` - just `requests`
 - `run.sh`, `run.bat` - run scripts
 
