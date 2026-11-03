@@ -108,3 +108,11 @@ function and `parse_chart()`.
 - The company name comes from Yahoo, so it may differ from the example (it says
   "Adobe Inc." now, not "Adobe Systems Incorporated").
 - Numbers can be delayed. This is for homework, not for trading.
+
+## Output screenshots-
+
+<img width="579" height="290" alt="Screenshot 2026-11-02 at 10 14 59 PM" src="https://github.com/user-attachments/assets/3967f36b-f249-4e2b-94a1-7875bc709f80" />
+
+
+<img width="415" height="121" alt="Screenshot 2026-11-02 at 10 15 22 PM" src="https://github.com/user-attachments/assets/e1a597b5-a6d3-4d17-87ca-4ee477916a6c" />
+
